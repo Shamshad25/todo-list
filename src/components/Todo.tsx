@@ -1,43 +1,43 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   AiFillPlusCircle,
   AiOutlineDelete,
   AiOutlineEdit,
 } from "react-icons/ai";
 import { v4 as uuid } from "uuid";
-type Task = {
-  id: string;
-  text: string;
-  check: boolean;
-};
+import { ITask } from "../redux/feature/ITask";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import {
+  addTask,
+  deleteTask,
+  todoSelector,
+  updateCheck,
+} from "../redux/feature/todoSlice";
 
 const Todo = () => {
   const unique_id = uuid();
   const [input, setInput] = useState("");
-  const [checked, setChecked] = useState(false);
-  const [tasks, setTasks] = useState<Task[]>([]);
+  const [tasks, setTasks] = useState<ITask[]>([]);
 
-  const handleOnChange = (position: string) => {
-    const updatedTasks = tasks.filter((elem) => {
-      if (position == elem.id) {
-        setChecked(!checked);
-        elem.check = !checked;
-      }
-      return elem;
-    });
-    setTasks(updatedTasks);
+  const selectedTask = useAppSelector(todoSelector);
+  const dispatch = useAppDispatch();
+
+  const handleOnChange = (position: ITask) => {
+    dispatch(updateCheck(position));
   };
+
+  useEffect(() => {
+    setTasks(selectedTask?.tasks);
+  }, [selectedTask]);
 
   const handleChange = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setTasks([
-      ...tasks,
-      {
-        id: unique_id,
-        text: input,
-        check: false,
-      },
-    ]);
+    const newTask = {
+      id: unique_id,
+      text: input,
+      check: false,
+    };
+    dispatch(addTask(newTask));
     setInput("");
   };
 
@@ -66,11 +66,10 @@ const Todo = () => {
             >
               <div className="flex justify-center">
                 <input
-                  // checked={checked}
                   value={task.id}
                   className="w-4 ml-2 pr-2"
                   type="checkbox"
-                  onChange={() => handleOnChange(task.id)}
+                  onChange={() => handleOnChange(task)}
                 />
                 <h1
                   className={"py-4 pl-2 text-lg"}
@@ -85,7 +84,7 @@ const Todo = () => {
                 <button className="pr-3">
                   <AiOutlineEdit color={"#A4C639"} size={"30px"} />
                 </button>
-                <button>
+                <button onClick={() => dispatch(deleteTask(task))}>
                   <AiOutlineDelete color={"#F65314"} size={"30px"} />
                 </button>
               </div>

@@ -1,14 +1,13 @@
-import Header from "./components/Header";
-import Todo from "./components/Todo";
+import Home from "./components/Home";
+import { Routes, Route } from "react-router-dom";
 
 function App() {
   return (
-    <main className="h-screen">
-      <Header />
-      <div className="flex justify-center">
-        <Todo />
-      </div>
-    </main>
+    <>
+      <Routes>
+        <Route path="/" element={<Home />} index />
+      </Routes>
+    </>
   );
 }
 
