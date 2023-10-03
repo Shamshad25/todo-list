@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from "react";
-import {
-  AiFillPlusCircle,
-  AiOutlineDelete,
-  AiOutlineEdit,
-} from "react-icons/ai";
+import { AiFillPlusCircle, AiOutlineDelete } from "react-icons/ai";
 import { v4 as uuid } from "uuid";
-import { ITask } from "../redux/feature/ITask";
+import { ITask } from "../redux/model/ITask";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import {
   addTask,
@@ -13,6 +9,7 @@ import {
   todoSelector,
   updateCheck,
 } from "../redux/feature/todoSlice";
+import EditModal from "./EditModal";
 
 const Todo = () => {
   const unique_id = uuid();
@@ -82,7 +79,7 @@ const Todo = () => {
               </div>
               <div className="p-3">
                 <button className="pr-3">
-                  <AiOutlineEdit color={"#A4C639"} size={"30px"} />
+                  <EditModal id={task.id} />
                 </button>
                 <button onClick={() => dispatch(deleteTask(task))}>
                   <AiOutlineDelete color={"#F65314"} size={"30px"} />

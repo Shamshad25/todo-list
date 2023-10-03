@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store";
-import { ITask } from "./ITask";
+import { ITask } from "../model/ITask";
 
 interface TaskState {
   tasks: ITask[];
@@ -44,9 +44,17 @@ export const todoSlice = createSlice({
         return task;
       });
     },
+    updateTask: (state, action: PayloadAction<ITask>) => {
+      state.tasks = state.tasks.map((task) => {
+        if(task.id === action.payload.id){
+          return action.payload;
+        }
+        return task
+      })
+    }
   },
 });
 
-export const { addTask, deleteTask, updateCheck } = todoSlice.actions;
+export const { addTask, deleteTask, updateCheck,updateTask } = todoSlice.actions;
 export const todoSelector = (state: RootState) => state.todoReducer;
 export default todoSlice.reducer;
