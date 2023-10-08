@@ -39,7 +39,7 @@ const Todo = () => {
   };
 
   return (
-    <section className="w-3/6 h-96 m-4">
+    <section className=" w-full sm:w-3/6 h-96 m-4">
       <form
         className="flex align-center justify-center"
         onSubmit={handleChange}

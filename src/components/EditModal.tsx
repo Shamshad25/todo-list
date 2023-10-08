@@ -70,18 +70,19 @@ const EditModal = ({ id }: Iid) => {
         <button onClick={closeModal} className=" w-full flex justify-end mb-4">
           <AiOutlineClose color={"#F65314"} size={"30px"} />
         </button>
-        <div className="w-full">
+        <div className="">
           <form
-            className="flex align-center justify-center"
+            className="flex flex-col sm:flex-row items-end sm:align-center sm:justify-center"
             onSubmit={handleSubmit}
           >
-            <input
-              type="text"
+            <textarea
+              // type="text"
               value={text}
               onChange={(e) => setText(e.target.value)}
               placeholder="Write your next task"
+              className="w-full border border-gray-400 rounded-lg"
             />
-            <button type="submit">
+            <button type="submit" className="">
               <AiFillPlusCircle color={"#00A1F1"} size={"50px"} />
             </button>
           </form>
