@@ -64,8 +64,9 @@ const EditModal = ({ id }: Iid) => {
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
-        style={customStyles}
+        // style={customStyles}
         contentLabel="Example Modal"
+        className="w-4/5 sm:w-1/2 bg-slate-50 p-4 absolute transform -translate-x-1/2 -translate-y-1/2 border top-1/2 left-1/2"
       >
         <button onClick={closeModal} className=" w-full flex justify-end mb-4">
           <AiOutlineClose color={"#F65314"} size={"30px"} />
