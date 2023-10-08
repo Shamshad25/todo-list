@@ -11,7 +11,7 @@ import { updateTask, todoSelector } from "../redux/feature/todoSlice";
 const customStyles = {
   content: {
     width: "50%",
-    height: "30%",
+    // height: "30%",
     top: "50%",
     left: "50%",
     right: "auto",
@@ -70,9 +70,9 @@ const EditModal = ({ id }: Iid) => {
         <button onClick={closeModal} className=" w-full flex justify-end mb-4">
           <AiOutlineClose color={"#F65314"} size={"30px"} />
         </button>
-        <div className="">
+        <div>
           <form
-            className="flex flex-col sm:flex-row items-end sm:align-center sm:justify-center"
+            className="flex flex-col sm:flex-row items-end sm:items-center sm:justify-center"
             onSubmit={handleSubmit}
           >
             <textarea
@@ -80,9 +80,9 @@ const EditModal = ({ id }: Iid) => {
               value={text}
               onChange={(e) => setText(e.target.value)}
               placeholder="Write your next task"
-              className="w-full border border-gray-400 rounded-lg"
+              className="w-full border border-gray-400 rounded-lg p-2"
             />
-            <button type="submit" className="">
+            <button type="submit" className="pt-1 sm:p-0">
               <AiFillPlusCircle color={"#00A1F1"} size={"50px"} />
             </button>
           </form>

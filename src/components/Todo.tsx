@@ -77,7 +77,7 @@ const Todo = () => {
                   {task.text}
                 </h1>
               </div>
-              <div className="p-3">
+              <div className="p-3 w-1/4 flex justify-center">
                 <button className="pr-3">
                   <EditModal id={task.id} />
                 </button>
